@@ -13,12 +13,20 @@
         // iOS判定
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
       
-        if (isIOS) {
-        // Safariを開くための特殊スキーム
-          window.location.href = `itms-apps://apple.com/` + url;
+        if (navigator.share) {
+          navigator.share({
+            title: "Safari で開く",
+            text: "このリンクを外部ブラウザで開いてください。",
+            url: url,
+          }).then(() => {
+            console.log("共有成功");
+          }).catch((error) => {
+            console.log("共有失敗", error);
+          });
         } else {
           window.location.href = url;
         }
+      });
 
           // if (isIOS) {
           //   // iOSなら「location.replace()」でSafariにリダイレクト
