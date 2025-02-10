@@ -8,36 +8,15 @@
      <title>Open external browser</title>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
-        // iOS判定
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      
-        if (navigator.share) {
-          navigator.share({
-            title: "Safari で開く",
-            text: "このリンクを外部ブラウザで開いてください。",
-            url: url,
-          }).then(() => {
-            console.log("共有成功");
-          }).catch((error) => {
-            console.log("共有失敗", error);
-          });
-        } else {
-          window.location.href = url;
-        }
-      });
 
-          // if (isIOS) {
-          //   // iOSなら「location.replace()」でSafariにリダイレクト
-          //   setTimeout(() => {
-          //     window.location.replace(url);
-          //   }, 100);
-          // } else {
-          //   // それ以外（Androidなど）は普通に開く
-          //   window.location.href = url;
-          // }
-          
+      document.addEventListener("DOMContentLoaded", function () {
+        const url = "https://www.patreon.com/proto_jp?open_in_browser=1"; // リダイレクト先のURL
+        // const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
+        setTimeout(() => {
+          window.location.replace(url);
+        }, 100);
+      });
+      
     </script>
 </head>
 
