@@ -9,22 +9,26 @@
 
      <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const url = "http://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
+        const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    
+
         if (/android/i.test(userAgent)) {
           // Androidならintentスキームを使用
-          window.location.href = `intent://${url.replace(/^https?:\/\//, "")}#Intent;scheme=https;package=com.android.chrome;end;`;
+          setTimeout(() => {
+            window.location.href = `intent://${url.replace(/^https?:\/\//, "")}#Intent;scheme=https;package=com.android.chrome;end;`;
+          }, 500); // 0.5秒遅延
         } else {
-          // それ以外なら新しいタブまたは外部ブラウザで開く
-          window.open(url, "_blank", "noopener,noreferrer");
+          // それ以外なら外部ブラウザで開く
+          setTimeout(() => {
+            window.open(url, "_blank", "noopener,noreferrer");
+          }, 500);
         }
-      });
+        });
     </script>
 </head>
 
 <body>
-  <a href="http://www.patreon.com/c/proto_jp/membership?open_in_browser=1" target="_blank" rel="noopener noreferrer">Open external browser</a>
+  <a href="https://www.patreon.com/c/proto_jp/membership?open_in_browser=1" target="_blank" rel="noopener noreferrer">Open external browser</a>
 </body>
 
 </html>
