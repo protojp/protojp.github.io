@@ -10,31 +10,20 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
-        const newTab = window.open("about:blank");
-        setTimeout(() => {
-          newTab.location.href = url;
-        }, 500);
-      });
-    </script>
+        // iOS判定
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    <!-- <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-        if (/android/i.test(userAgent)) {
-          // Androidならintentスキームを使用
+        if (isIOS) {
+          // iOSなら「location.replace()」でSafariにリダイレクト
           setTimeout(() => {
-            window.location.href = `intent://${url.replace(/^https?:\/\//, "")}#Intent;scheme=https;package=com.android.chrome;end;`;
-          }, 500); // 0.5秒遅延
+            window.location.replace(url);
+          }, 100);
         } else {
-          // それ以外なら外部ブラウザで開く
-          setTimeout(() => {
-            window.open(url, "_blank", "noopener,noreferrer");
-          }, 500);
+          // それ以外（Androidなど）は普通に開く
+          window.location.href = url;
         }
         });
-    </script> -->
+    </script>
 </head>
 
 <body>
