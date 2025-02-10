@@ -12,16 +12,29 @@
         const url = "https://www.patreon.com/c/proto_jp/membership?open_in_browser=1"; // リダイレクト先のURL
         // iOS判定
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
+      
         if (isIOS) {
-          // iOSなら「location.replace()」でSafariにリダイレクト
-          setTimeout(() => {
-            window.location.replace(url);
-          }, 100);
+          // <a>タグを作成し、自動クリック
+          const a = document.createElement("a");
+          a.href = url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          document.body.appendChild(a);
+          a.click();
         } else {
-          // それ以外（Androidなど）は普通に開く
           window.location.href = url;
         }
+
+          // if (isIOS) {
+          //   // iOSなら「location.replace()」でSafariにリダイレクト
+          //   setTimeout(() => {
+          //     window.location.replace(url);
+          //   }, 100);
+          // } else {
+          //   // それ以外（Androidなど）は普通に開く
+          //   window.location.href = url;
+          // }
+          
         });
     </script>
 </head>
