@@ -14,13 +14,8 @@
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
       
         if (isIOS) {
-          // <a>タグを作成し、自動クリック
-          const a = document.createElement("a");
-          a.href = url;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          document.body.appendChild(a);
-          a.click();
+        // Safariを開くための特殊スキーム
+          window.location.href = `itms-apps://apple.com/` + url;
         } else {
           window.location.href = url;
         }
